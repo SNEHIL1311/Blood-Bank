@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Donors - Blood Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400&display=swap');
+
+        /* Heartbeat lifeline animation */
+        .lifeline {
+            position: relative;
+            width: 100%;
+            height: 3px;
+            background-color: #f00;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .heartbeat {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: #f00;
+            transform: translateX(-100%);
+            animation: heartbeat 3s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            20% {
+                transform: translateX(-100%);
+            }
+
+            25% {
+                transform: translateX(0);
+                height: 3px;
+            }
+
+            30% {
+                height: 20px;
+                transform: translateX(5%);
+            }
+
+            35% {
+                height: 3px;
+                transform: translateX(10%);
+            }
+
+            40% {
+                height: 15px;
+                transform: translateX(15%);
+            }
+
+            45% {
+                height: 3px;
+                transform: translateX(25%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-red-100 font-roboto min-h-screen flex flex-col justify-center items-center">
+
+    <!-- Lifeline Heartbeat Animation -->
+    <div class="w-full flex justify-center">
+        <div class="lifeline">
+            <div class="heartbeat"></div>
+        </div>
+    </div>
+
+    <!-- Search Form -->
+    <div class="bg-red-300 p-8 rounded-lg shadow-lg text-center mt-8">
+        <h1 class="text-4xl font-bold mb-4" style="font-family: 'Poppins', sans-serif;">Search Donors by Blood Group</h1>
+        <form th:action="@{/search}" method="get" class="space-y-4">
+            <input type="text" name="bloodType" placeholder="Enter Blood Type (e.g., A+, B-, O+)"
+                class="p-3 w-64 rounded-lg border-2 border-red-400 focus:outline-none focus:border-red-500">
+            <button type="submit"
+                class="bg-red-500 text-white py-2 px-6 rounded-full hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500 transition-all duration-300 font-bold">Search</button>
+        </form>
+    </div>
+
+    <!-- Results Table -->
+    <div class="container mx-auto mt-8">
+        <h2 class="text-3xl font-bold mb-4 text-center" style="font-family: 'Poppins', sans-serif;">Search Results</h2>
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full text-center">
+                <thead class="bg-red-500 text-white">
+                    <tr>
+                        <th class="px-4 py-2">ID</th>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Blood Type</th>
+                        <th class="px-4 py-2">Contact Number</th>
+                        <th class="px-4 py-2">Email</th>
+                        <th class="px-4 py-2">Address</th>
+                    </tr>
+                </thead>
+              
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

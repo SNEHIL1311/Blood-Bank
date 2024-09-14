@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Bank: Be a Hero, Donate Blood</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Navbar -->
+    <nav class="bg-red-800 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-extrabold text-white tracking-wide">Blood Bank</a>
+            <div class="flex space-x-6 items-center">
+                <a href="adduser.html" class="bg-white text-red-800 hover:bg-red-600 hover:text-white font-bold py-2 px-4 rounded-full transition duration-300">Add User</a>
+                <a href="showUser.html" class="bg-white text-red-800 hover:bg-red-600 hover:text-white font-bold py-2 px-4 rounded-full transition duration-300">Show Users</a>
+                <a href="search.html" class="bg-white text-red-800 hover:bg-red-600 hover:text-white font-bold py-2 px-4 rounded-full transition duration-300">Search Users</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Carousel -->
+    <section class="bg-cover bg-center h-screen overflow-hidden relative">
+        <div id="carouselExampleIndicators" class="carousel slide h-full" data-bs-ride="carousel">
+            <div class="carousel-inner h-full">
+                <div class="carousel-item h-full active" data-bs-interval="3000">
+                    <img src="https://t3.ftcdn.net/jpg/03/60/19/34/360_F_360193480_kiF7OU7k3YUhAADbLQzobEFwgOeejHZJ.jpg" class="d-block w-full h-full object-cover" alt="Blood donation">
+                </div>
+                <div class="carousel-item h-full" data-bs-interval="3000">
+                    <img src="https://c0.wallpaperflare.com/preview/1023/625/239/blood-donation-blood-unit-of-blood-health.jpg" class="d-block w-full h-full object-cover" alt="Blood units for donation">
+                </div>
+                <div class="carousel-item h-full" data-bs-interval="3000">
+                    <img src="https://e1.pxfuel.com/desktop-wallpaper/558/737/desktop-wallpaper-blood-donation-blood-donor.jpg" class="d-block w-full h-full object-cover" alt="Blood donation event">
+                </div>
+            </div>
+            <button class="carousel-control-prev absolute left-0 top-1/2 transform -translate-y-1/2 p-3 text-white bg-red-800 rounded-full" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next absolute right-0 top-1/2 transform -translate-y-1/2 p-3 text-white bg-red-800 rounded-full" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- Overlay Text -->
+        <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+            <h1 class="text-5xl font-extrabold mb-4">Be a Hero, Donate Blood</h1>
+            <p class="text-2xl mb-6">Your blood donation can make a lifesaving difference.</p>
+            <a href="adduser.html"><button class="bg-red-700 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">Donate Now</button></a> 
+        </div>
+    </section>
+
+    <!-- Information Section -->
+    <section class="bg-white text-center py-16">
+        <h2 class="text-3xl font-bold text-red-800">Why Donate Blood?</h2>
+        <p class="text-lg text-gray-700 max-w-3xl mx-auto mt-4">By donating blood, you help save lives and provide vital resources for hospitals and clinics. It's a simple yet powerful way to make a positive impact on someone's life. Become a part of the solution today.</p>
+        <button class="mt-8 bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-full transition duration-300">Learn More</button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-red-800 p-4 text-center text-white">
+        <p>© 2024 Blood Bank. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

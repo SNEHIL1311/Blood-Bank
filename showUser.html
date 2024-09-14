@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Users - Blood Bank</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-red-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-white">Blood Bank</a>
+            <div class="flex items-center">
+                <a href="adduser.html" class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">Add User</a>
+                <a href="search.html" class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ml-4">Search</a>
+                <a href="showUsers.html" class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ml-4">Show Users</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Table Section -->
+    <section class="container mx-auto p-6">
+        <h2 class="text-3xl font-bold mb-6 text-center text-red-800">All Users</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+                <thead class="bg-red-800 text-white">
+                    <tr>
+                        <th class="py-2 px-4 border-b">User ID</th>
+                        <th class="py-2 px-4 border-b">Name</th>
+                        <th class="py-2 px-4 border-b">Gender</th>
+                        <th class="py-2 px-4 border-b">Age</th>
+                        <th class="py-2 px-4 border-b">Blood Group</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- User data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+   
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $.ajax({
+        type: "GET",  
+        url: "http://localhost:8085/search", 
+        success: function(data) {
+            var s="";
+            data.forEach(e => {
+                s+="<tr>"
+                s+="<td>"+e.userId+"</td>"
+                s+="<td>"+e.name+"</td>"
+                s+="<td>"+e.gender+"</td>"
+                s+="<td>"+e.age+"</td>"
+                s+="<td>"+e.bloodGroup+"</td>"
+                s+="</tr>"
+            });
+            $("#userTableBody").html(s);
+        }
+    });
+});
+
+</script>
+  
+  
+</html>

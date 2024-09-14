@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User - Blood Bank</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <nav class="bg-red-800 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo / Brand Name -->
+            <a href="#" class="text-white text-xl font-bold">Blood Bank</a>
+
+            <!-- Menu Items -->
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-white hover:text-red-200 transition">Home</a>
+                <a href="showUser.html" class="text-white hover:text-red-200 transition">All Users</a>
+                <a href="search.html" class="text-white hover:text-red-200 transition">Search</a>
+                </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="text-white md:hidden" id="mobile-menu-button">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    <!-- Main Container -->
+    <div class="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl bg-white shadow-lg rounded-lg overflow-hidden">
+        
+        <!-- Images Section -->
+        <div class="hidden md:block md:w-1/2 bg-cover bg-center relative">
+            <div class="grid grid-cols-1 gap-4 p-4">
+                <img src="https://e1.pxfuel.com/desktop-wallpaper/558/737/desktop-wallpaper-blood-donation-blood-donor.jpg" class="rounded-lg object-cover h-56 w-full" alt="Blood Donation Image 1">
+                <img src="https://vtwp-media.s3-accelerate.amazonaws.com/2024/04/shutterstock_1450385729.jpg" class="rounded-lg object-cover h-56 w-full" alt="Blood Donation Image 2">
+                <img src="https://cdn.pixabay.com/photo/2023/11/15/14/28/heart-8390212_640.jpg" class="rounded-lg object-cover h-56 w-full" alt="Blood Donation Image 3">
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="w-full md:w-1/2 p-8">
+            <h2 class="text-3xl font-bold mb-6 text-center text-red-800">Add User</h2>
+            <form>
+                <div>
+                    <label for="userId" class="block text-lg font-medium text-gray-700 mb-1">User ID</label>
+                    <input type="text" id="userId" name="userId" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500" required>
+                </div>
+                <hr class="my-4 border-t border-gray-300">
+                <div>
+                    <label for="name" class="block text-lg font-medium text-gray-700 mb-1">Name</label>
+                    <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500" required>
+                </div>
+                <hr class="my-4 border-t border-gray-300">
+                <div>
+                    <label for="gender" class="block text-lg font-medium text-gray-700 mb-1">Gender</label>
+                    <select id="gender" name="gender" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <hr class="my-4 border-t border-gray-300">
+                <div>
+                    <label for="age" class="block text-lg font-medium text-gray-700 mb-1">Age</label>
+                    <input type="number" id="age" name="age" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500" required>
+                </div>
+                <hr class="my-4 border-t border-gray-300">
+                <div>
+                    <label for="bloodGroup" class="block text-lg font-medium text-gray-700 mb-1">Blood Group</label>
+                    <select id="bloodGroup" name="bloodGroup" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500">
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                </div>
+                <hr class="my-4 border-t border-gray-300">
+                <div class="text-center">
+                    <button type="button" class="bg-red-800 text-white font-bold py-2 px-6 rounded-full hover:bg-red-600 transition duration-300" id="b1">Add</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          $("#b1").click(function(){
+                var uid=$("#userId").val();
+                var name=$("#name").val();
+                var gender=$("#gender").val();
+                var age=$("#age").val();
+                var bloodGroup=$("#bloodGroup").val();
+                $.ajax({
+                    contentType: "application/json",
+                    type: "POST",  
+                    url: "http://localhost:8085/save", 
+                    data: JSON.stringify({userId:uid,name:name,gender:gender,age:age,bloodGroup:bloodGroup}),
+                    success: function(data) {
+                            alert(data);
+                        }
+                });
+        
+                // $.ajax({
+                //     type: "DELETE",  
+                //     url: "http://localhost:8080/delete/" + uid,
+                //     success: function(data) {
+                //         alert(data);
+                //     }
+                // });
+        
+                // $.ajax({
+                //     type: "GET",  
+                //     url: "http://localhost:8080/searchById/" + uid,
+                //     success: function(data) {
+                //         alert(data);
+                //     }
+                // });
+        
+                // $.ajax({
+                //     type: "PUT",  
+                //     url: "http://localhost:8085/update", 
+                //     data: {userId:uid,name:name,gender:gender,age:age,bloodGroup:bloodGroup},
+                //     success: function(data) {
+                //         alert(data);
+                //     }
+                // });
+        
+               
+        });
+        });
+        </script>
+</body>
+</html>

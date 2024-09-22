@@ -1,114 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Donors - Blood Bank</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400&display=swap');
-
-        /* Heartbeat lifeline animation */
-        .lifeline {
-            position: relative;
-            width: 100%;
-            height: 3px;
-            background-color: #f00;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-
-        .heartbeat {
-            position: absolute;
-            width: 100%;
-            height: 3px;
-            background-color: #f00;
-            transform: translateX(-100%);
-            animation: heartbeat 3s infinite;
-        }
-
-        @keyframes heartbeat {
-            0% {
-                transform: translateX(-100%);
-            }
-
-            20% {
-                transform: translateX(-100%);
-            }
-
-            25% {
-                transform: translateX(0);
-                height: 3px;
-            }
-
-            30% {
-                height: 20px;
-                transform: translateX(5%);
-            }
-
-            35% {
-                height: 3px;
-                transform: translateX(10%);
-            }
-
-            40% {
-                height: 15px;
-                transform: translateX(15%);
-            }
-
-            45% {
-                height: 3px;
-                transform: translateX(25%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
-        }
-    </style>
+    <title>Search User - Blood Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-
-<body class="bg-red-100 font-roboto min-h-screen flex flex-col justify-center items-center">
-
-    <!-- Lifeline Heartbeat Animation -->
-    <div class="w-full flex justify-center">
-        <div class="lifeline">
-            <div class="heartbeat"></div>
-        </div>
-    </div>
-
-    <!-- Search Form -->
-    <div class="bg-red-300 p-8 rounded-lg shadow-lg text-center mt-8">
-        <h1 class="text-4xl font-bold mb-4" style="font-family: 'Poppins', sans-serif;">Search Donors by Blood Group</h1>
-        <form th:action="@{/search}" method="get" class="space-y-4">
-            <input type="text" name="bloodType" placeholder="Enter Blood Type (e.g., A+, B-, O+)"
-                class="p-3 w-64 rounded-lg border-2 border-red-400 focus:outline-none focus:border-red-500">
-            <button type="submit"
-                class="bg-red-500 text-white py-2 px-6 rounded-full hover:bg-transparent hover:border hover:border-red-500 hover:text-red-500 transition-all duration-300 font-bold">Search</button>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full md:w-1/2 p-8 bg-white shadow-lg rounded-lg">
+        <h2 class="text-3xl font-bold mb-6 text-center text-red-800">Search User</h2>
+        <form id="searchForm">
+            <div>
+                <label for="userId" class="block text-lg font-medium text-gray-700 mb-1">User ID</label>
+                <input type="text" id="userId" name="userId" class="w-full p-3 border border-gray-300 rounded-md" required>
+                <button type="button" id="searchBtn" class="bg-red-800 text-white font-bold py-2 px-4 rounded-full mt-4">Search</button>
+            </div>
         </form>
-    </div>
-
-    <!-- Results Table -->
-    <div class="container mx-auto mt-8">
-        <h2 class="text-3xl font-bold mb-4 text-center" style="font-family: 'Poppins', sans-serif;">Search Results</h2>
-        <div class="overflow-x-auto">
-            <table class="table-auto w-full text-center">
-                <thead class="bg-red-500 text-white">
-                    <tr>
-                        <th class="px-4 py-2">ID</th>
-                        <th class="px-4 py-2">Name</th>
-                        <th class="px-4 py-2">Blood Type</th>
-                        <th class="px-4 py-2">Contact Number</th>
-                        <th class="px-4 py-2">Email</th>
-                        <th class="px-4 py-2">Address</th>
-                    </tr>
-                </thead>
-              
-            </table>
+        <div id="userDetails" class="hidden mt-6">
+            <h3 class="text-xl font-bold">User Details:</h3>
+            <p id="name"></p>
+            <p id="gender"></p>
+            <p id="age"></p>
+            <p id="bloodGroup"></p>
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#searchBtn").click(function(){
+                var uid = $("#userId").val();
+                $.ajax({
+                    type: "GET",  
+                    url: "http://localhost:8085/searchById/" + uid,
+                    success: function(data) {
+                        // Display user details
+                        $("#name").text("Name: " + data.name);
+                        $("#gender").text("Gender: " + data.gender);
+                        $("#age").text("Age: " + data.age);
+                        $("#bloodGroup").text("Blood Group: " + data.bloodGroup);
+                        $("#userDetails").removeClass("hidden");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
-
 </html>

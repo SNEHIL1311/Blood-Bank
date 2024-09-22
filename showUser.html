@@ -28,45 +28,83 @@
             <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-lg">
                 <thead class="bg-red-800 text-white">
                     <tr>
+                        <th class="py-2 px-4 border-b">ID</th>
                         <th class="py-2 px-4 border-b">User ID</th>
                         <th class="py-2 px-4 border-b">Name</th>
                         <th class="py-2 px-4 border-b">Gender</th>
                         <th class="py-2 px-4 border-b">Age</th>
                         <th class="py-2 px-4 border-b">Blood Group</th>
+                        <th class="py-2 px-4 border-b">Update</th>
+                        <th class="py-2 px-4 border-b">Delete</th>
                     </tr>
                 </thead>
                 <tbody id="userTableBody">
-                    <!-- User data will be inserted here -->
+                    <!-- User data will be inserted here -->    
                 </tbody>
             </table>
         </div>
     </section>
-
    
 </body>
+
+<!-- jQuery for AJAX -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
+    // Fetch users from backend and display in the table
     $.ajax({
         type: "GET",  
         url: "http://localhost:8085/search", 
         success: function(data) {
-            var s="";
+            var s = "";
             data.forEach(e => {
-                s+="<tr>"
-                s+="<td>"+e.userId+"</td>"
-                s+="<td>"+e.name+"</td>"
-                s+="<td>"+e.gender+"</td>"
-                s+="<td>"+e.age+"</td>"
-                s+="<td>"+e.bloodGroup+"</td>"
-                s+="</tr>"
+                s += "<tr>";
+                s += "<td class='border px-4 py-2'>" + e.id + "</td>";          // Added ID column
+                s += "<td class='border px-4 py-2'>" + e.userId + "</td>";     // User ID column
+                s += "<td class='border px-4 py-2'>" + e.name + "</td>";       // Name
+                s += "<td class='border px-4 py-2'>" + e.gender + "</td>";     // Gender
+                s += "<td class='border px-4 py-2'>" + e.age + "</td>";        // Age
+                s += "<td class='border px-4 py-2'>" + e.bloodGroup + "</td>"; // Blood Group
+                
+                // Update Button with id
+                s += "<td class='border px-4 py-2'>";
+                s += "<button onclick='redirectToUpdatePage(" + e.id + ")' class='bg-yellow-500 text-white font-bold py-2 px-4 rounded-full'>Update</button>";
+                s += "</td>";
+                
+                // Delete Button with id
+                s += "<td class='border px-4 py-2'>";
+                s += "<button onclick='deleteUser(" + e.id + ")' class='bg-red-800 text-white font-bold py-2 px-4 rounded-full'>Delete</button>";
+                s += "</td>";
+                s += "</tr>";
             });
             $("#userTableBody").html(s);
+        },
+        error: function(error) {
+            console.log("Error fetching users:", error);
         }
     });
 });
 
+// Function to delete a user based on id
+function deleteUser(id) {
+    if (confirm("Are you sure you want to delete this user?")) {
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8085/delete/" + id,
+            success: function(response) {
+                alert("User deleted successfully!");
+                location.reload();  // Refresh the page after deletion
+            },
+            error: function(error) {
+                alert("Error deleting user.");
+            }
+        });
+    }
+}
+
+// Function to redirect to the update user page based on id
+function redirectToUpdatePage(id) {
+    window.location.href = "updateUser.html?id=" + id;
+}
 </script>
-  
-  
 </html>
